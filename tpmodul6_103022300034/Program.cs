@@ -54,21 +54,24 @@ public class SayaTubeVideo
         {
             SayaTubeVideo video = new SayaTubeVideo("Tutorial Design By Contract - Ariq Hisyam Nabil");
 
-            video.IncreasePlayCount(1000);
-            video.IncreasePlayCount(500);
-
-            video.PrintVideoDetails();
-
-            for (int i = 0; i < 1000; i++)
+            while (true)
             {
-                try
+                Console.Write("Enter play count to increase (max 10,000,000): ");
+                if (int.TryParse(Console.ReadLine(), out int playCount))
                 {
-                    video.IncreasePlayCount(10000000);
+                    try
+                    {
+                        video.IncreasePlayCount(playCount);
+                        video.PrintVideoDetails();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("An error occurred: " + ex.Message);
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    Console.WriteLine("An error occurred: " + ex.Message);
-                    break;
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
                 }
             }
         }
